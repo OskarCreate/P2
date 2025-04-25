@@ -64,9 +64,23 @@ namespace P2.Controllers
             return RedirectToAction("Confirmacion");
         }
 
-        public IActionResult Confirmacion()
-        {
-            return View();
-        }
+        public async Task<IActionResult> Confirmacion()
+{
+    var userId = _userManager.GetUserId(User);
+
+    var ultimoPago = await _context.Pago
+        .Where(p => p.UsuarioId == userId)
+        .OrderByDescending(p => p.PaymentDate)
+        .FirstOrDefaultAsync();
+
+    if (ultimoPago == null)
+    {
+        return RedirectToAction("Index", "Home");
+    }
+
+    return View("Confirmacion", ultimoPago);
+}
+
+
     }
 }

@@ -15,13 +15,24 @@ namespace P2.Models
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
+
+        [Column(TypeName = "timestamp without time zone")]
         public DateTime PaymentDate { get; set; }
+
+        [Required(ErrorMessage = "El nombre de la tarjeta es obligatorio.")]
         public string? NombreTarjeta { get; set; }
+
+        [Required(ErrorMessage = "El número de la tarjeta es obligatorio.")]
         public string? NumeroTarjeta { get; set; }
+
         [NotMapped]
+        [Required(ErrorMessage = "El mes/año es obligatorio.")]
         public string? DueDateYYMM { get; set; }
+
         [NotMapped]
+        [Required(ErrorMessage = "El Cvv es obligatorio.")]
         public string? Cvv { get; set; }
+        
         public Decimal MontoTotal { get; set; }
 
         public string? Status { get; set; }

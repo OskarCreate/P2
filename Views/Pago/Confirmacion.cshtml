@@ -1,0 +1,30 @@
+@model P2.Models.Pago
+
+@{
+    ViewData["Title"] = "Confirmación de Pedido";
+}
+
+<h2 class="text-success">¡Pedido confirmado con éxito!</h2>
+
+<div class="card mt-4 p-3 shadow-sm">
+    <h4>Resumen del pago</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-4">Nombre de Tarjeta:</dt>
+        <dd class="col-sm-8">@Model.NombreTarjeta</dd>
+
+        <dt class="col-sm-4">Número de Tarjeta:</dt>
+        <dd class="col-sm-8">**** **** **** @Model.NumeroTarjeta?.Substring(Model.NumeroTarjeta.Length - 4)</dd>
+
+        <dt class="col-sm-4">Fecha de Pago:</dt>
+        <dd class="col-sm-8">@Model.PaymentDate.ToString("dd/MM/yyyy HH:mm")</dd>
+
+        <dt class="col-sm-4">Monto Total:</dt>
+        <dd class="col-sm-8">S/ @Model.MontoTotal</dd>
+
+        <dt class="col-sm-4">Estado:</dt>
+        <dd class="col-sm-8">@Model.Status</dd>
+    </dl>
+</div>
+
+<a asp-controller="Home" asp-action="Index" class="btn btn-primary mt-3">Volver al Inicio</a>
