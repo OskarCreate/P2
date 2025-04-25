@@ -1,0 +1,25 @@
+@model List<P2.Models.Producto>
+
+@{
+    ViewData["Title"] = "Catálogo de Productos";
+}
+
+<div class="container">
+    <h1>@ViewData["Title"]</h1>
+    <div class="row">
+        @foreach (var producto in Model)
+        {
+            <div class="col-md-3 mb-4">  <!-- Utilizamos 3 para obtener 4 productos por fila -->
+                <div class="card">
+                    <img class="card-img-top" src="@producto.ImagenUrl" alt="Imagen de @producto.Nombre">
+                    <div class="card-body">
+                        <h5 class="card-title">@producto.Nombre</h5>
+                        <p class="card-text">@producto.Descripcion</p>
+                        <p class="card-text"><strong>@producto.Precio.ToString("C")</strong></p>
+                        <a href="@Url.Action("Details", "Catalogo", new { id = producto.Id })" class="btn btn-primary">Ver más</a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

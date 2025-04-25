@@ -1,0 +1,57 @@
+@model List<P2.Models.CarritoItem>
+@{
+    ViewData["Title"] = "Mi Carrito";
+}
+
+<div class="container mt-4">
+    <h2>Mi Carrito</h2>
+    @if (!Model.Any())
+    {
+        <p>No tienes productos en el carrito.</p>
+    }
+    else
+    {
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Imagen</th>
+                    <th>Producto</th>
+                    <th>Precio unitario</th>
+                    <th>Cantidad</th>
+                    <th>Total</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td><img src="@item.ImagenUrl" width="80" /></td>
+                        <td>@item.NombreProducto</td>
+                        <td>@item.PrecioUnitario.ToString("C")</td>
+                        <td>
+                            <form asp-action="ActualizarCantidad" method="post" class="d-inline">
+                                <input type="hidden" name="id" value="@item.Id" />
+                                <input type="number" name="cantidad" value="@item.Cantidad" min="1" class="form-control d-inline w-50" />
+                                <button class="btn btn-sm btn-secondary">Actualizar</button>
+                            </form>
+                        </td>
+                        <td>@item.PrecioTotal.ToString("C")</td>
+                        <td>
+                            <form asp-action="Eliminar" method="post">
+                                <input type="hidden" name="id" value="@item.Id" />
+                                <button class="btn btn-danger btn-sm">Eliminar</button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <div class="text-end">
+        <strong>Total general:</strong> @Model.Sum(i => i.PrecioTotal).ToString("C")
+
+        <a asp-controller="Pago" asp-action="Index" class="btn btn-success mt-2">Pagar</a>
+
+        </div>
+    }
+</div>

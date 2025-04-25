@@ -1,0 +1,42 @@
+@model P2.Models.Pago
+@{
+    ViewData["Title"] = "Pago";
+}
+
+<div class="container mt-4">
+    <h2>Formulario de Pago</h2>
+    <p><strong>Total a pagar:</strong> @ViewBag.Total.ToString("C")</p>
+
+    <form asp-action="Index" method="post">
+        <div class="mb-3">
+            <label asp-for="NombreTarjeta" class="form-label"></label>
+            <input asp-for="NombreTarjeta" class="form-control" />
+            <span asp-validation-for="NombreTarjeta" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="NumeroTarjeta" class="form-label"></label>
+            <input asp-for="NumeroTarjeta" class="form-control" />
+            <span asp-validation-for="NumeroTarjeta" class="text-danger"></span>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <label asp-for="DueDateYYMM" class="form-label">Expiración (MM/AA)</label>
+                <input asp-for="DueDateYYMM" class="form-control" placeholder="MM/AA" />
+                <span asp-validation-for="DueDateYYMM" class="text-danger"></span>
+            </div>
+            <div class="col-md-6 mb-3">
+                <label asp-for="Cvv" class="form-label"></label>
+                <input asp-for="Cvv" class="form-control" />
+                <span asp-validation-for="Cvv" class="text-danger"></span>
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-success">Pagar</button>
+    </form>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
