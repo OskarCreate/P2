@@ -3,7 +3,9 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using P2.Data;
 using P2.Models;
+using Microsoft.AspNetCore.Authorization;
 
+[Authorize]
 public class CarritoController : Controller
 {
     private readonly ApplicationDbContext _context;

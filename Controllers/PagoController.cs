@@ -2,11 +2,13 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
 using P2.Data;
 using P2.Models;
 
 namespace P2.Controllers
 {
+    [Authorize]
     public class PagoController : Controller
     {
         private readonly ApplicationDbContext _context;

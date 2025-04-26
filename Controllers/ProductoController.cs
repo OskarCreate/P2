@@ -5,11 +5,13 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
 using P2.Data;
 using P2.Models;
 
 namespace P2.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class ProductoController : Controller
     {
         private readonly ApplicationDbContext _context;
